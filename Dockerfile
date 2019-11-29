@@ -62,6 +62,11 @@ RUN cd /tmp \
         && make install \
         && docker-php-ext-enable swoole
 
+# add id_rsa.pub in authorized_keys
+ARG SSH_PUB_KEY
+RUN mkdir -p ~/.ssh \
+        && echo $SSH_PUB_KEY > ~/.ssh/authorized_keys
+
 WORKDIR /root/codeDir
 
 CMD ["/usr/sbin/sshd", "-D"]
