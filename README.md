@@ -36,6 +36,10 @@ CODEDIR_VOLUME=~/codeDir:/root/codeDir
 
 指的是容器中root用户的密码，用来登陆容器用的。例如：`123456`。
 
+#### SWOOLE_VERSION（必须）
+
+指定安装的`Swoole`版本。例如：`4.4.12`。
+
 ### 编译镜像
 
 ```shell

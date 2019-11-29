@@ -2,11 +2,12 @@ version: '3'
 
 services:
   php_alpine:
+    image: php_alpine:ssh
     build:
       context: .
       args:
         - PASSWORD=${PASSWORD}
-    image: php_alpine
+        - SWOOLE_VERSION=${SWOOLE_VERSION}
     container_name: php_alpine
     volumes:
       - ${CODEDIR_VOLUME}
@@ -16,6 +17,7 @@ services:
       - TEST_PHP_EXECUTABLE=/usr/local/bin/php
       - http_proxy=${HTTP_PROXY}
       - https_proxy=${HTTPS_PROXY}
+      - SWOOLE_VERSION=${SWOOLE_VERSION}
     security_opt:
       - seccomp:unconfined
     cap_add:
