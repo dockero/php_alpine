@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  php_alpine:
+    build:
+      context: .
+      args:
+        - PASSWORD=${PASSWORD}
+    image: php_alpine
+    container_name: php_alpine
+    volumes:
+      - ${CODEDIR_VOLUME}
+    ports:
+      - "${HOST_SSH_PORT}:22"
+    environment:
+      - TEST_PHP_EXECUTABLE=/usr/local/bin/php
+      - http_proxy=${HTTP_PROXY}
+      - https_proxy=${HTTPS_PROXY}
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+      - SYS_PTRACE
+    stdin_open: true
+    tty: true
+    privileged: true
+    restart: always
+    command: /usr/sbin/sshd -D
