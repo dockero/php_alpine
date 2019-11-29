@@ -26,4 +26,3 @@ services:
     tty: true
     privileged: true
     restart: always
-    command: /usr/sbin/sshd -D
