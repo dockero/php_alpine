@@ -36,6 +36,10 @@ CODEDIR_VOLUME=~/codeDir:/root/codeDir
 
 指的是容器中root用户的密码，用来登陆容器用的。例如：`123456`。
 
+#### SSH_PUB_KEY（可选）
+
+把宿主机的公钥添加到容器的`~/.ssh/authorized_keys`里面，用来免密登陆。
+
 #### SWOOLE_VERSION（必须）
 
 指定安装的`Swoole`版本。例如：`4.4.12`。
