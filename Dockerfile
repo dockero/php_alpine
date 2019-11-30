@@ -62,10 +62,24 @@ RUN cd /tmp \
         && make install \
         && docker-php-ext-enable swoole
 
+# add vscode environment
+RUN apk add bash \
+        nodejs
+
+RUN apk --no-cache add ca-certificates wget
+RUN wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
+RUN wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.30-r0/glibc-2.30-r0.apk
+RUN apk add glibc-2.30-r0.apk
+
+RUN apk add libstdc++6
 # add id_rsa.pub in authorized_keys
 ARG SSH_PUB_KEY
 RUN mkdir -p ~/.ssh \
         && echo $SSH_PUB_KEY > ~/.ssh/authorized_keys
+
+# set the path to the compiler's search library
+ARG LD_LIBRARY_PATH
+RUN echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH" >> /etc/profile
 
 WORKDIR /root/codeDir
 
